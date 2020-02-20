@@ -1,3 +1,10 @@
+# Check this links
+
+https://github.com/korayyersel/mycap2/blob/master/installation.md
+
+https://github.com/SAP-samples/cloud-cap-nodejs-codejam/tree/master/exercises/09
+
+
 # Getting Started
 
 Welcome to your new project.
@@ -25,5 +32,3 @@ File / Folder | Purpose
 Learn more at https://cap.cloud.sap/docs/get-started/
 
 
-
-https://github.com/SAP-samples/cloud-cap-nodejs-codejam/tree/master/exercises/09
