@@ -1,0 +1,21 @@
+{
+  "xsappname": "bookshop-srv",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.iamrootrole",
+      "description": "iamrootrole"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "iamrootrole",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.iamrootrole"
+      ],
+      "attribute-references": []
+    }
+  ]
+}

@@ -25,17 +25,37 @@ modules:
    path: gen/srv
    properties:
      EXIT: 1  # required by deploy.js task to terminate 
-
+   parameters:
+     memory: 256M
+     disk-quota: 256M
    
    requires:
     #### Resources extracted from CAP configuration ####
     - name: bookshop-db
+    - name: bookshop-uaa
 
    provides:
     - name: srv-binding    # required by consumers of CAP services (e.g. approuter)
       properties:
         srv-url: ${default-url}
 
+ ############################################################
+ ##############    UI     MODULE   ##########################
+ - name: bookshop-ui
+   type: nodejs
+   path: app
+   parameters:
+     memory: 256M
+     disk-quota: 256M
+   requires:
+     - name: bookshop-uaa
+     - name: srv-binding
+       group: destinations
+       properties:
+         forwardAuthToken: true
+         strictSSL: true
+         name: srv-binding
+         url: ~{srv-url}
  ############################################################
 
  ##############    SIDECAR MODULE   #########################
@@ -59,6 +79,14 @@ resources:
    type: com.sap.xs.hdi-container 
    
    parameters:
+     service: hanatrial
    properties:
      hdi-service-name: ${service-name}   # required for Java case
 ############################################################
+##############  UUUA  ##################################
+ - name: bookshop-uaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: application
+     service: xsuaa
+     path: ./xs-security.json
